@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poiret+One&display=swap" rel="stylesheet">
+   
+    <title>ToDoList</title>
+    
+</head>
+<body>
+    <div class="container">
+      <div class="containerNewTask">
+        <h3>Что нужно сделать</h3>      
+        <div class="contentNewTask">
+          <input id="inputNewTask" type="text" maxlength="20" autofocus>
+          <select id="selectPriority">
+            <option value='' selected disabled hidden>Укажите важность</option>
+            <option value='high'>Срочно</option>
+            <option value='low'>Не срочно</option>
+          </select>
+          <button class="button buttonAdd">&#43;</button>
+        </div>
+      </div>
+      <div class="containerMyTasks">
+        <h3>Список моих дел</h3>
+        <div class="contentTasks">
+          <div class="contentLowTasks">
+            <h4>Нужно сделать срочно</h4>
+              <div class="highPriority">
+              </div>
+            </div>
+            <div class="contentHighTasks">
+            <h4>Может подождать</h4>
+              <div class="lowPriority">
+              </div>
+            </div>
+        </div>
+      </div>
+    </div>
+    <script src="script.js"></script> 
+  </body>
+</html>

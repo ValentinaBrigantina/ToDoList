@@ -1,0 +1,172 @@
+.container {
+  display: block;
+  width: 550px;
+  height: 800px;
+  margin: 100px auto 0;
+  font-family: 'Poiret One';
+  color: rgb(14, 44, 46);
+}
+
+label {
+  cursor: pointer;
+}
+
+select {
+  margin-left: 30px;
+  margin-right: 30px;
+}
+
+input[type='text'] {
+  height: 37px;
+  width: 260px;
+  font-family: 'Poiret One';
+  font-size: 18px;
+  color: rgb(10, 49, 16);
+  border: 0;
+  border-bottom: 1px solid rgb(48, 7, 7);
+}
+
+.contentNewTask {
+  display: flex;
+  justify-content: space-between;
+}
+
+.itemMyTask {
+  display: flex;
+  justify-content: space-between;
+}
+
+label {
+  height: 30px;
+  width: 300px;
+  margin: 10px 10px 10px 0;
+  font-family: 'Poiret One';
+  font-size: 18px;
+  color: rgb(10, 49, 16);
+}
+
+h3 {
+  font-size: 26px;
+  font-weight: 100;
+  padding: 30px 0 10px;
+  text-transform: uppercase;
+}
+
+.containerNewTask > h3 {
+  color: rgb(255, 247, 236);
+  background-color:  #8fbec7;
+  border-radius: 4px;
+  padding: 10px;
+}
+
+h4 {
+  padding: 10px;
+  border-radius: 4px;
+  color: rgb(255, 247, 236);
+}
+
+.contentLowTasks > h4 {
+  background-color: #b3504b;
+}
+
+.contentHighTasks > h4 {
+  background-color: #aec086;
+}
+
+input[type='text'], button, input[type='text']:focus, .button:focus {
+  outline: none;
+}
+
+label > span {
+  font-size: 36px;
+  height: 20px;
+}
+
+button {
+  width: 40px;
+  height: 40px;
+  background: none;
+  border: 0px;
+  font-family: 'Poiret One';
+  color: #8fbec7;
+  cursor: pointer;
+  font-size: 24px;
+}
+
+.bottons {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.buttonDelete {
+  color: #b3504b;
+}
+
+.buttonDelete:hover {
+  color: rgb(255, 247, 236);
+  background-color:  #b3504b;
+  border-radius: 4px;
+  transition: 0.3s;
+}
+
+.buttonEdit:hover {
+  color: rgb(255, 247, 236);
+  background-color: #8fbec7;
+  border-radius: 4px;
+  transition: 0.3s;
+}
+
+.buttonSave, .buttonAdd {
+  color: #aec086;
+  font-size: 35px;
+  border: 1px solid #aec086;
+  border-radius: 4px;
+}
+
+.buttonSave:hover, .buttonAdd:hover {
+  background-color: #aec086;
+  color: rgb(255, 247, 236);
+  transition: 0.3s;
+}
+
+.buttonSave {
+  margin-left: 204px;
+}
+
+.containerMyTasks {
+  margin-top: 70px;
+}
+
+input[type=checkbox] + label span {
+  border: 1px solid #5c5047;
+  color: #5c5047;
+  border-radius: 4px;
+  display: inline-block;
+  width: 20px;
+  line-height: 0.25em;
+  margin: 4px 8px 8px 0px;
+  padding: 2px;
+  text-align: center;
+  vertical-align: middle;
+}
+
+input[type=checkbox]:checked + label span::after {
+  content: "\2713";
+}
+
+input[type=checkbox] {
+  display: none;
+}
+
+.warningMessage {
+  width: 300px;
+  height: 50px;
+  border-radius: 4px;
+  background-color: rgb(247, 223, 223);
+  color: rgb(71, 71, 71);
+  text-align: center;
+  margin-top: 8px;
+  margin-bottom: -40px;
+  line-height: 50px;
+}
