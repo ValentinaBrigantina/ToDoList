@@ -66,11 +66,11 @@ h4 {
 }
 
 .contentLowTasks > h4 {
-  background-color: #b3504b;
+  background-color: #aec086;
 }
 
 .contentHighTasks > h4 {
-  background-color: #aec086;
+  background-color: #b3504b;
 }
 
 input[type='text'], button, input[type='text']:focus, .button:focus {
@@ -93,28 +93,39 @@ button {
   font-size: 24px;
 }
 
-.bottons {
+.buttons {
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: space-evenly;
+}
+
+.button:hover {
+  border-radius: 4px;
+  transition: 0.3s;
+  color: rgb(255, 247, 236);
 }
 
 .buttonDelete {
   color: #b3504b;
 }
 
-.buttonDelete:hover {
-  color: rgb(255, 247, 236);
-  background-color:  #b3504b;
+.buttonPrev, .buttonNext {
+  width: 50px;
+  height: 20px;
+  font-size: 30px;
+  display: flex;
+  justify-content: center;
+  line-height: 4px;
+  border: 1px solid #8fbec7;
   border-radius: 4px;
-  transition: 0.3s;
 }
 
-.buttonEdit:hover {
-  color: rgb(255, 247, 236);
+.buttonDelete:hover {
+  background-color:  #b3504b;
+}
+
+.buttonEdit:hover, .buttonPrev:hover, .buttonNext:hover {
   background-color: #8fbec7;
-  border-radius: 4px;
-  transition: 0.3s;
 }
 
 .buttonSave, .buttonAdd {
@@ -126,12 +137,14 @@ button {
 
 .buttonSave:hover, .buttonAdd:hover {
   background-color: #aec086;
-  color: rgb(255, 247, 236);
-  transition: 0.3s;
 }
 
 .buttonSave {
   margin-left: 204px;
+}
+
+.withoutTasks {
+  margin-top: 50px;
 }
 
 .containerMyTasks {
@@ -169,4 +182,8 @@ input[type=checkbox] {
   margin-top: 8px;
   margin-bottom: -40px;
   line-height: 50px;
+}
+
+.hidden {
+  display: none;
 }
