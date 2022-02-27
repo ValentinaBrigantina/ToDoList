@@ -4,8 +4,15 @@ const inputNewTask = document.getElementById('inputNewTask')
 const selectPriority = document.getElementById('selectPriority')
 const buttonAddNewTask = document.querySelector('.buttonAdd')
 const containerNewTask = document.querySelector('.containerNewTask')
+const containerMyTasks = document.querySelector('.containerMyTasks')
 const lowPriorityTasks = document.querySelector('.lowPriority')
 const highPriorityTasks = document.querySelector('.highPriority')
+const containerLowTasks = document.querySelector('.contentLowTasks')
+const containerHighTasks = document.querySelector('.contentHighTasks')
+const withoutTasks = document.querySelector('.withoutTasks')
+const buttonsHigh = document.querySelector('.buttonsHigh')
+const buttonsLow = document.querySelector('.buttonsLow')
+
 let arrTasksLowPriority = []
 let arrTasksHighPriority = []
 
@@ -41,9 +48,37 @@ const createTemplate = (task, index) => {
     `
 }
 
+const checkHiddenTasks = () => {
+    if(arrayMyTasks.length) {
+        containerMyTasks.classList.remove('hidden')
+    } else {
+        containerMyTasks.classList.add('hidden')
+    }
+
+    if(!arrTasksLowPriority.length) {
+        containerLowTasks.classList.add('hidden')
+    } else {
+        containerLowTasks.classList.remove('hidden')
+    }
+
+    if(!arrTasksHighPriority.length) {
+        containerHighTasks.classList.add('hidden')
+    } else {
+        containerHighTasks.classList.remove('hidden')
+    }
+}
+
 const filterTasks = () => {
     arrTasksLowPriority = arrayMyTasks.length && arrayMyTasks.filter(item => item.priority === 'low')
     arrTasksHighPriority = arrayMyTasks.length && arrayMyTasks.filter(item => item.priority === 'high')
+}
+
+const addBtnNextPrev = (arrPriority, buttons) => {
+    console.log(arrPriority.length)
+    if(arrPriority.length > 5) {
+        buttons.classList.remove('hidden')
+        console.log('done')
+    }
 }
 
 const fillHtmlList = () => {
@@ -51,6 +86,7 @@ const fillHtmlList = () => {
     lowPriorityTasks.innerHTML = ''
 
     if(arrayMyTasks.length > 0) {
+        withoutTasks.classList.add('hidden')
         arrayMyTasks.forEach((item, index) => {
 
             if(item.priority === 'high') {
@@ -66,7 +102,10 @@ const fillHtmlList = () => {
     }
 }
 
+filterTasks()
+checkHiddenTasks()
 fillHtmlList()
+
 
 const updateLocal = () => {
     localStorage.setItem('tasks', JSON.stringify(arrayMyTasks))
@@ -75,8 +114,10 @@ const updateLocal = () => {
 const completedTask = index => {
     arrayMyTasks[index].comleted = !arrayMyTasks[index].comleted
     updateLocal()
-    fillHtmlList()
+    
     filterTasks()
+    checkHiddenTasks()
+    fillHtmlList()
 }
 
 const createlWarningMessage = message => {
@@ -113,8 +154,14 @@ const fillHtmlError = (point, message) => {
 const deleteTask = index => {
     arrayMyTasks.splice(index, 1)
     updateLocal()
-    fillHtmlList()
+    
     filterTasks()
+    checkHiddenTasks()
+    fillHtmlList()
+    if(arrayMyTasks.length === 0) {
+        containerMyTasks.classList.add('hidden')
+        withoutTasks.classList.remove('hidden')
+    }
 }
 
 const createTaskChange = (index, task) => {
@@ -143,8 +190,10 @@ function saveEditedTask (index) {
     if(input.value === arrayMyTasks[index].description) {
         arrayMyTasks[index].description = input.value
         updateLocal()
-        fillHtmlList()
+        
         filterTasks()
+        checkHiddenTasks()
+        fillHtmlList()
     }
 
     else if(checkOfRepeat()) {
@@ -153,8 +202,10 @@ function saveEditedTask (index) {
     } else {
         arrayMyTasks[index].description = input.value
         updateLocal()
-        fillHtmlList()
+        
         filterTasks()
+        checkHiddenTasks()
+        fillHtmlList()
     }
 }
 
@@ -213,9 +264,14 @@ const addEvent = () => {
     updateLocal()
     fillHtmlList()
     filterTasks()
+    checkHiddenTasks()
+    
     inputNewTask.value = ''
     selectPriority.value = ''
     inputNewTask.focus()
+
+    addBtnNextPrev(arrTasksHighPriority, buttonsHigh)
+    addBtnNextPrev(arrTasksLowPriority, buttonsLow)
     
 }
 

@@ -24,20 +24,34 @@
           <button class="button buttonAdd">&#43;</button>
         </div>
       </div>
-      <div class="containerMyTasks">
+
+      <div class="withoutTasks">
+        <h3>Пока ничего не запланировано</h3>
+      </div>
+
+      <div class="containerMyTasks hidden">
         <h3>Список моих дел</h3>
-        <div class="contentTasks">
-          <div class="contentLowTasks">
-            <h4>Нужно сделать срочно</h4>
-              <div class="highPriority">
-              </div>
-            </div>
-            <div class="contentHighTasks">
-            <h4>Может подождать</h4>
-              <div class="lowPriority">
-              </div>
-            </div>
+
+        <div class="contentHighTasks">
+          <h4>Нужно сделать срочно</h4>
+          <div class="highPriority">
+          </div>
+          <div class="buttons buttonsHigh hidden">
+            <button class="button buttonPrev">&#8592;</button>
+            <button class="button buttonNext">&#8594;</button>
+          </div>
         </div>
+          
+        <div class="contentLowTasks">
+          <h4>Может подождать</h4>
+          <div class="lowPriority">
+          </div>
+          <div class="buttons buttonsLow hidden">
+            <button class="button buttonPrev">&#8592;</button>
+            <button class="button buttonNext">&#8594;</button>
+          </div>
+        </div>
+            
       </div>
     </div>
     <script src="script.js"></script> 
