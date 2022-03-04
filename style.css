@@ -1,8 +1,7 @@
 .container {
   display: block;
   width: 550px;
-  height: 800px;
-  margin: 100px auto 0;
+  margin: 70px auto 70px;
   font-family: 'Poiret One';
   color: rgb(14, 44, 46);
 }
@@ -93,13 +92,18 @@ button {
   font-size: 24px;
 }
 
+.button:disabled {
+  color: darkgray;
+  border: 1px solid darkgray;
+}
+
 .buttons {
   display: flex;
   align-items: center;
   justify-content: space-evenly;
 }
 
-.button:hover {
+.button:hover:enabled {
   border-radius: 4px;
   transition: 0.3s;
   color: rgb(255, 247, 236);
@@ -124,7 +128,7 @@ button {
   background-color:  #b3504b;
 }
 
-.buttonEdit:hover, .buttonPrev:hover, .buttonNext:hover {
+.buttonEdit:hover, .buttonPrev:hover:enabled, .buttonNext:hover:enabled {
   background-color: #8fbec7;
 }
 
@@ -140,7 +144,7 @@ button {
 }
 
 .buttonSave {
-  margin-left: 204px;
+  margin-left: 246px;
 }
 
 .withoutTasks {
