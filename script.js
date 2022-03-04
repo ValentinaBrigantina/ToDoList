@@ -12,9 +12,22 @@ const containerHighTasks = document.querySelector('.contentHighTasks')
 const withoutTasks = document.querySelector('.withoutTasks')
 const buttonsHigh = document.querySelector('.buttonsHigh')
 const buttonsLow = document.querySelector('.buttonsLow')
+const btnNextHigh = document.querySelector('.buttonsHigh > .buttonNext')
+const btnPrevHigh = document.querySelector('.buttonsHigh > .buttonPrev')
+const btnNextLow = document.querySelector('.buttonsLow > .buttonNext')
+const btnPrevLow = document.querySelector('.buttonsLow > .buttonPrev')
 
 let arrTasksLowPriority = []
 let arrTasksHighPriority = []
+
+let pageNoLow
+!localStorage.pageNoLow ? pageNoLow = 0 : pageNoLow = localStorage.getItem('pageNoLow')
+let pageNoHigh
+!localStorage.pageNoHigh ? pageNoHigh = 0 : pageNoHigh = localStorage.getItem('pageNoHigh')
+const numberTasksToShow = 5
+
+let partOfTasksLow
+let partOfTasksHigh
 
 let arrayMyTasks
 !localStorage.tasks ? arrayMyTasks = [] : arrayMyTasks = JSON.parse(localStorage.getItem('tasks'))
@@ -74,27 +87,31 @@ const filterTasks = () => {
 }
 
 const addBtnNextPrev = (arrPriority, buttons) => {
-    console.log(arrPriority.length)
     if(arrPriority.length > 5) {
         buttons.classList.remove('hidden')
-        console.log('done')
     }
+}
+
+const makePartOfTasks = () => {
+    partOfTasksLow = arrTasksLowPriority.slice(pageNoLow * numberTasksToShow, pageNoLow * numberTasksToShow + numberTasksToShow)
+    partOfTasksHigh = arrTasksHighPriority.slice(pageNoHigh * numberTasksToShow, pageNoHigh * numberTasksToShow + numberTasksToShow)
 }
 
 const fillHtmlList = () => {
     highPriorityTasks.innerHTML = ''
     lowPriorityTasks.innerHTML = ''
 
-    if(arrayMyTasks.length > 0) {
+    if(arrayMyTasks.length) {
         withoutTasks.classList.add('hidden')
+        makePartOfTasks()
         arrayMyTasks.forEach((item, index) => {
 
-            if(item.priority === 'high') {
+            if(partOfTasksHigh.includes(item)) {
                 highPriorityTasks.innerHTML += createTemplate(item, index)
                 selectPriority.value = ''
             }
 
-            if(item.priority === 'low') {
+            if(partOfTasksLow.includes(item)) {
                 lowPriorityTasks.innerHTML += createTemplate(item, index)
                 selectPriority.value = ''
             }
@@ -102,22 +119,46 @@ const fillHtmlList = () => {
     }
 }
 
-filterTasks()
-checkHiddenTasks()
-fillHtmlList()
+const disableBtnNextPrev = (pageNo, btnPrev, btnNext, arrTasks) => {
+    if(pageNo === 0) {
+        btnPrev.setAttribute('disabled', true)
+    } else {
+        btnPrev.removeAttribute('disabled')
+    }
 
+    if(pageNo * numberTasksToShow + numberTasksToShow > arrTasks.length) {
+        btnNext.setAttribute('disabled', true)
+    } else {
+        btnNext.removeAttribute('disabled')
+    }
+}
+
+const updateBtn = () => {
+    addBtnNextPrev(arrTasksHighPriority, buttonsHigh)
+    addBtnNextPrev(arrTasksLowPriority, buttonsLow)
+    disableBtnNextPrev(pageNoHigh, btnPrevHigh, btnNextHigh, arrTasksHighPriority)
+    disableBtnNextPrev(pageNoLow, btnPrevLow, btnNextLow, arrTasksLowPriority)
+}
 
 const updateLocal = () => {
     localStorage.setItem('tasks', JSON.stringify(arrayMyTasks))
+    localStorage.setItem('pageNoLow', pageNoLow)
+    localStorage.setItem('pageNoHigh', pageNoHigh)
 }
 
-const completedTask = index => {
-    arrayMyTasks[index].comleted = !arrayMyTasks[index].comleted
+const updateTasks = () => {
     updateLocal()
-    
     filterTasks()
     checkHiddenTasks()
     fillHtmlList()
+}
+
+updateTasks()
+updateBtn()
+
+const completedTask = index => {
+    arrayMyTasks[index].comleted = !arrayMyTasks[index].comleted
+    updateTasks()
 }
 
 const createlWarningMessage = message => {
@@ -151,13 +192,23 @@ const fillHtmlError = (point, message) => {
     }
 }
 
+const hideBtnNextPrev = () => {
+    if(arrTasksLowPriority.length <= 5) {
+        buttonsLow.classList.add('hidden') 
+    }
+    if(arrTasksHighPriority.length <= 5) {
+        buttonsHigh.classList.add('hidden') 
+    }
+}
+
 const deleteTask = index => {
     arrayMyTasks.splice(index, 1)
-    updateLocal()
     
-    filterTasks()
-    checkHiddenTasks()
-    fillHtmlList()
+    updateTasks()
+    updateBtn()
+    hideBtnNextPrev()
+    console.log(partOfTasksHigh)
+    
     if(arrayMyTasks.length === 0) {
         containerMyTasks.classList.add('hidden')
         withoutTasks.classList.remove('hidden')
@@ -189,11 +240,7 @@ function saveEditedTask (index) {
 
     if(input.value === arrayMyTasks[index].description) {
         arrayMyTasks[index].description = input.value
-        updateLocal()
-        
-        filterTasks()
-        checkHiddenTasks()
-        fillHtmlList()
+        updateTasks()
     }
 
     else if(checkOfRepeat()) {
@@ -201,11 +248,7 @@ function saveEditedTask (index) {
 
     } else {
         arrayMyTasks[index].description = input.value
-        updateLocal()
-        
-        filterTasks()
-        checkHiddenTasks()
-        fillHtmlList()
+        updateTasks()
     }
 }
 
@@ -261,18 +304,24 @@ const addEvent = () => {
     
     deleteError()
     arrayMyTasks.push(new Task(inputNewTask.value, selectPriority.value))
-    updateLocal()
-    fillHtmlList()
-    filterTasks()
-    checkHiddenTasks()
-    
+    updateTasks()
+    updateBtn()
+
     inputNewTask.value = ''
     selectPriority.value = ''
     inputNewTask.focus()
+}
 
-    addBtnNextPrev(arrTasksHighPriority, buttonsHigh)
-    addBtnNextPrev(arrTasksLowPriority, buttonsLow)
-    
+function pageHighLeft() {
+    pageNoHigh--
+    updateTasks()
+    updateBtn()
+}
+
+function pageLowLeft() {
+    pageNoLow--
+    updateTasks()
+    updateBtn()
 }
 
 buttonAddNewTask.addEventListener('click', addEvent)
@@ -282,3 +331,19 @@ inputNewTask.addEventListener('keyup', e => {
         addEvent()
     }
 })
+
+btnNextHigh.addEventListener('click', () => {
+    pageNoHigh++
+    updateTasks()
+    updateBtn()
+})
+
+btnPrevHigh.addEventListener('click', pageHighLeft)
+
+btnNextLow.addEventListener('click', () => {
+    pageNoLow++
+    updateTasks()
+    updateBtn()
+})
+
+btnPrevLow.addEventListener('click', pageLowLeft)
