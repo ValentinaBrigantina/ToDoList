@@ -104,6 +104,17 @@ const fillHtmlList = () => {
     if(arrayMyTasks.length) {
         withoutTasks.classList.add('hidden')
         makePartOfTasks()
+
+        if(!partOfTasksLow.length) {
+        pageNoLow--
+        makePartOfTasks()
+        }
+
+        if(!partOfTasksHigh.length) {
+            pageNoHigh--
+            makePartOfTasks()
+        }
+        
         arrayMyTasks.forEach((item, index) => {
 
             if(partOfTasksHigh.includes(item)) {
@@ -207,7 +218,6 @@ const deleteTask = index => {
     updateTasks()
     updateBtn()
     hideBtnNextPrev()
-    console.log(partOfTasksHigh)
     
     if(arrayMyTasks.length === 0) {
         containerMyTasks.classList.add('hidden')
