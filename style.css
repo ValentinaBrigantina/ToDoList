@@ -3,7 +3,7 @@
   width: 550px;
   margin: 70px auto 70px;
   font-family: 'Poiret One';
-  color: rgb(14, 44, 46);
+  color: rgb(0, 0, 0);
 }
 
 label {
@@ -20,9 +20,9 @@ input[type='text'] {
   width: 260px;
   font-family: 'Poiret One';
   font-size: 18px;
-  color: rgb(10, 49, 16);
+  color: rgb(0, 0, 0);
   border: 0;
-  border-bottom: 1px solid rgb(48, 7, 7);
+  border-bottom: 1px solid rgb(0, 0, 0);
 }
 
 .contentNewTask {
@@ -41,7 +41,7 @@ label {
   margin: 10px 10px 10px 0;
   font-family: 'Poiret One';
   font-size: 18px;
-  color: rgb(10, 49, 16);
+  color: rgb(0, 0, 0);
 }
 
 h3 {
@@ -156,8 +156,8 @@ button {
 }
 
 input[type=checkbox] + label span {
-  border: 1px solid #5c5047;
-  color: #5c5047;
+  border: 1px solid rgb(0, 0, 0);
+  color: rgb(0, 0, 0);
   border-radius: 4px;
   display: inline-block;
   width: 20px;
@@ -181,7 +181,7 @@ input[type=checkbox] {
   height: 50px;
   border-radius: 4px;
   background-color: rgb(247, 223, 223);
-  color: rgb(71, 71, 71);
+  color: rgb(0, 0, 0);
   text-align: center;
   margin-top: 8px;
   margin-bottom: -40px;

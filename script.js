@@ -105,12 +105,12 @@ const fillHtmlList = () => {
         withoutTasks.classList.add('hidden')
         makePartOfTasks()
 
-        if(!partOfTasksLow.length) {
+        if(!partOfTasksLow.length && pageNoLow && arrTasksLowPriority.length) {
         pageNoLow--
         makePartOfTasks()
         }
 
-        if(!partOfTasksHigh.length) {
+        if(!partOfTasksHigh.length && pageNoHigh && arrTasksHighPriority.length) {
             pageNoHigh--
             makePartOfTasks()
         }
@@ -131,7 +131,7 @@ const fillHtmlList = () => {
 }
 
 const disableBtnNextPrev = (pageNo, btnPrev, btnNext, arrTasks) => {
-    if(pageNo === 0) {
+    if(pageNo == 0) {
         btnPrev.setAttribute('disabled', true)
     } else {
         btnPrev.removeAttribute('disabled')
@@ -322,18 +322,6 @@ const addEvent = () => {
     inputNewTask.focus()
 }
 
-function pageHighLeft() {
-    pageNoHigh--
-    updateTasks()
-    updateBtn()
-}
-
-function pageLowLeft() {
-    pageNoLow--
-    updateTasks()
-    updateBtn()
-}
-
 buttonAddNewTask.addEventListener('click', addEvent)
 
 inputNewTask.addEventListener('keyup', e => {
@@ -348,7 +336,13 @@ btnNextHigh.addEventListener('click', () => {
     updateBtn()
 })
 
-btnPrevHigh.addEventListener('click', pageHighLeft)
+btnPrevHigh.addEventListener('click', () => {
+    if(pageNoHigh > 0) {
+        pageNoHigh--
+        updateTasks()
+        updateBtn()
+    }
+})
 
 btnNextLow.addEventListener('click', () => {
     pageNoLow++
@@ -356,4 +350,10 @@ btnNextLow.addEventListener('click', () => {
     updateBtn()
 })
 
-btnPrevLow.addEventListener('click', pageLowLeft)
+btnPrevLow.addEventListener('click', () => {
+    if(pageNoLow > 0) {
+        pageNoLow--
+        updateTasks()
+        updateBtn() 
+    }
+})
