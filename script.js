@@ -239,9 +239,8 @@ const checkOfRepeat = (index) => {
     let bool
     
         if(isRepeat(input.value)) {
-            const i = input.parentElement
-            console.log(i)
-            fillHtmlError(i, 'Запись уже есть в списке дел!')
+            const divTask = input.parentElement
+            fillHtmlError(divTask, 'Запись уже есть в списке дел!')
             bool = true
         }
     return bool
@@ -285,8 +284,20 @@ const focusOnInput = index => {
 }
 
 const editTask = index => {
+    if(document.querySelector('.InputForEdit')) {
+        updateTasks()
+    }
+
     fillHtmlEditTask(index)
     focusOnInput(index)
+
+    const inp = document.querySelector('.InputForEdit')
+
+    inp.addEventListener('keyup', e => {
+        if(e.key === 'Enter') {
+            saveEditedTask(index)
+        }
+    })
 }
 
 const isRepeat = task => {
