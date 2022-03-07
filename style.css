@@ -152,6 +152,10 @@ button {
   margin-left: 246px;
 }
 
+.buttonsHigh, .buttonsLow {
+  margin-top: 8px;
+}
+
 .withoutTasks {
   margin-top: 50px;
 }
