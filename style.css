@@ -6,6 +6,10 @@
   color: rgb(0, 0, 0);
 }
 
+.containerNewTask {
+  margin-bottom: 35px;
+}
+
 label {
   cursor: pointer;
 }
@@ -33,6 +37,7 @@ input[type='text'] {
 .itemMyTask {
   display: flex;
   justify-content: space-between;
+  flex-wrap: wrap;
 }
 
 label {
@@ -151,10 +156,6 @@ button {
   margin-top: 50px;
 }
 
-.containerMyTasks {
-  margin-top: 70px;
-}
-
 input[type=checkbox] + label span {
   border: 1px solid rgb(0, 0, 0);
   color: rgb(0, 0, 0);
@@ -177,15 +178,16 @@ input[type=checkbox] {
 }
 
 .warningMessage {
+  display: flex;
+  text-align: center;
+  justify-content: center;
   width: 300px;
   height: 50px;
   border-radius: 4px;
   background-color: rgb(247, 223, 223);
   color: rgb(0, 0, 0);
-  text-align: center;
   margin-top: 8px;
-  margin-bottom: -40px;
-  line-height: 50px;
+  margin-bottom: 8px;
 }
 
 .hidden {

@@ -234,12 +234,14 @@ const createTaskChange = (index, task) => {
 ` 
 }
 
-const checkOfRepeat = () => {
+const checkOfRepeat = (index) => {
     const input = document.querySelector('.InputForEdit')
     let bool
     
         if(isRepeat(input.value)) {
-            fillHtmlError(containerNewTask, 'Запись уже есть в списке дел!')
+            const i = input.parentElement
+            console.log(i)
+            fillHtmlError(i, 'Запись уже есть в списке дел!')
             bool = true
         }
     return bool
@@ -253,7 +255,7 @@ function saveEditedTask (index) {
         updateTasks()
     }
 
-    else if(checkOfRepeat()) {
+    else if(checkOfRepeat(index)) {
         return
 
     } else {
